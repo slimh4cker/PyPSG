@@ -8,7 +8,7 @@ TREE_PREFIXES: tuple[str, ...] = (
 
 FILE_EXTENSIONS: tuple[str, ...] = (
     ".py", ".txt", ".md", ".toml", ".json",
-    ".yaml", ".yml", ".env"
+    ".yaml", ".yml", ".env", ".gitignore"
 )
 
 
@@ -35,7 +35,11 @@ def is_file(name: str) -> bool:
     """
     Determine whether a node name represents a file.
     """
-    return name.lower().endswith(FILE_EXTENSIONS)
+    name = name.lower()
+    return (
+        name.startswith(".")
+        or name.endswith(FILE_EXTENSIONS)
+    )
 
 
 def indent_level(raw_line: str) -> int:
